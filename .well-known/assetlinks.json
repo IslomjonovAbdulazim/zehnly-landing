@@ -1,0 +1,16 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ai.zehnly",
+      "sha256_cert_fingerprints": [
+        "A3:88:96:80:0E:93:56:CF:E1:26:F5:30:F9:6A:8F:C7:CD:5D:57:B9:EC:05:42:F9:8E:A2:EC:5D:11:62:4D:77",
+        "81:E3:1E:43:E4:A5:CF:22:FC:9F:EF:FC:06:A9:49:DD:B4:5C:B2:7C:64:78:DA:C1:19:7F:23:1B:68:70:FF:95",
+        "27:28:28:ED:B3:52:03:65:8F:A8:5C:95:F8:AE:40:0F:21:A1:C0:B6:11:98:D1:48:E1:1A:68:AE:57:16:E6:1B"
+      ]
+    }
+  }
+]
