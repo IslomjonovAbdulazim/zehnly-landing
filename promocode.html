@@ -201,10 +201,24 @@
         }
 
         .tutorial-images {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .carousel-container {
             display: flex;
-            flex-direction: column;
             gap: 20px;
-            align-items: center;
+            padding: 20px 0;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            display: none;
         }
 
         .tutorial-step {
@@ -212,16 +226,95 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
+            flex: 0 0 auto;
             animation: stepAppear 0.8s ease-out;
+            min-width: 280px;
+            padding: 0 10px;
         }
 
-        .tutorial-step:nth-child(1) { animation-delay: 0.5s; animation-fill-mode: both; }
-        .tutorial-step:nth-child(2) { animation-delay: 0.7s; animation-fill-mode: both; }
-        .tutorial-step:nth-child(3) { animation-delay: 0.9s; animation-fill-mode: both; }
+        .step-description {
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.4;
+            max-width: 250px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tutorial-step:nth-child(1) { animation-delay: 0.3s; animation-fill-mode: both; }
+        .tutorial-step:nth-child(2) { animation-delay: 0.5s; animation-fill-mode: both; }
+        .tutorial-step:nth-child(3) { animation-delay: 0.7s; animation-fill-mode: both; }
+        .tutorial-step:nth-child(4) { animation-delay: 0.9s; animation-fill-mode: both; }
+        .tutorial-step:nth-child(5) { animation-delay: 1.1s; animation-fill-mode: both; }
+        .tutorial-step:nth-child(6) { animation-delay: 1.3s; animation-fill-mode: both; }
 
         @keyframes stepAppear {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-dot.active {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .carousel-arrows:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrows.left {
+            left: -25px;
+        }
+
+        .carousel-arrows.right {
+            right: -25px;
         }
 
         .step-number {
@@ -276,40 +369,128 @@
         }
 
         @media (max-width: 768px) {
+            .main-container {
+                gap: 30px;
+                padding: 10px;
+            }
+            
             .promocode-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .promocode-display {
-                font-size: 2rem;
-                letter-spacing: 4px;
+                font-size: 1.8rem;
+                letter-spacing: 3px;
                 padding: 20px 25px;
             }
             
             .tutorial-title {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+                margin-bottom: 20px;
             }
             
-            .tutorial-images {
-                flex-direction: column;
+            .tutorial-step {
+                min-width: 250px;
             }
             
             .tutorial-img {
-                max-width: 250px;
+                max-width: 220px;
+            }
+            
+            .step-description {
+                font-size: 13px;
+                max-width: 220px;
+                padding: 8px 12px;
+            }
+            
+            .carousel-arrows {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .carousel-arrows.left {
+                left: -20px;
+            }
+            
+            .carousel-arrows.right {
+                right: -20px;
             }
         }
 
         @media (max-width: 480px) {
-            .promocode-display {
+            body {
+                padding: 10px;
+            }
+            
+            .promocode-title {
                 font-size: 1.5rem;
+            }
+            
+            .promocode-display {
+                font-size: 1.4rem;
                 letter-spacing: 2px;
                 padding: 15px 20px;
             }
             
             .promocode-section,
             .tutorial-section {
-                padding: 25px;
-                margin: 10px;
+                padding: 20px;
+                margin: 5px;
+            }
+            
+            .tutorial-step {
+                min-width: 200px;
+            }
+            
+            .tutorial-img {
+                max-width: 180px;
+            }
+            
+            .step-description {
+                font-size: 12px;
+                max-width: 180px;
+                padding: 6px 10px;
+            }
+            
+            .carousel-arrows {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .carousel-arrows.left {
+                left: -15px;
+            }
+            
+            .carousel-arrows.right {
+                right: -15px;
+            }
+            
+            .nav-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .promocode-display {
+                font-size: 1.2rem;
+                letter-spacing: 1px;
+                padding: 12px 16px;
+            }
+            
+            .tutorial-step {
+                min-width: 180px;
+            }
+            
+            .tutorial-img {
+                max-width: 160px;
+            }
+            
+            .step-description {
+                font-size: 11px;
+                max-width: 160px;
             }
         }
     </style>
@@ -321,8 +502,6 @@
     <a href="/" class="back-btn">← Back to Home</a>
     
     <div class="main-container">
-        <img src="/assets/logo.jpg" alt="Zehnly" class="logo">
-        
         <div class="promocode-section">
             <h1 class="promocode-title">Your Promocode</h1>
             <div class="promocode-display" id="promocodeText"></div>
@@ -332,17 +511,47 @@
         <div class="tutorial-section">
             <h2 class="tutorial-title">How to Use</h2>
             <div class="tutorial-images">
-                <div class="tutorial-step">
-                    <div class="step-number">1</div>
-                    <img src="/assets/t1.PNG" alt="Step 1" class="tutorial-img">
+                <div class="carousel-arrows left" onclick="slideCarousel(-1)">‹</div>
+                <div class="carousel-arrows right" onclick="slideCarousel(1)">›</div>
+                <div class="carousel-container" id="carouselContainer">
+                    <div class="tutorial-step">
+                        <div class="step-number">1</div>
+                        <img src="/assets/t1.PNG" alt="Step 1" class="tutorial-img">
+                        <div class="step-description">Zehnlyni yuklab oling, va oching. va ZehnPro tugmasini bosing.</div>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-number">2</div>
+                        <img src="/assets/t2.PNG" alt="Step 2" class="tutorial-img">
+                        <div class="step-description">O'z rejangisni tanlang tugmasini bosing.</div>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-number">3</div>
+                        <img src="/assets/t3.PNG" alt="Step 3" class="tutorial-img">
+                        <div class="step-description">Promo kod kiriting ni bosing.</div>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-number">4</div>
+                        <img src="/assets/t4.PNG" alt="Step 4" class="tutorial-img">
+                        <div class="step-description">PROMOCODE ni kiriting.</div>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-number">5</div>
+                        <img src="/assets/t5.PNG" alt="Step 5" class="tutorial-img">
+                        <div class="step-description">Keyingi qadamga o'ting.</div>
+                    </div>
+                    <div class="tutorial-step">
+                        <div class="step-number">6</div>
+                        <img src="/assets/t6.PNG" alt="Step 6" class="tutorial-img">
+                        <div class="step-description">Qo'shish tugmasini bosing.</div>
+                    </div>
                 </div>
-                <div class="tutorial-step">
-                    <div class="step-number">2</div>
-                    <img src="/assets/t2.PNG" alt="Step 2" class="tutorial-img">
-                </div>
-                <div class="tutorial-step">
-                    <div class="step-number">3</div>
-                    <img src="/assets/t3.PNG" alt="Step 3" class="tutorial-img">
+                <div class="carousel-nav" id="carouselNav">
+                    <div class="nav-dot active" onclick="goToSlide(0)"></div>
+                    <div class="nav-dot" onclick="goToSlide(1)"></div>
+                    <div class="nav-dot" onclick="goToSlide(2)"></div>
+                    <div class="nav-dot" onclick="goToSlide(3)"></div>
+                    <div class="nav-dot" onclick="goToSlide(4)"></div>
+                    <div class="nav-dot" onclick="goToSlide(5)"></div>
                 </div>
             </div>
         </div>
@@ -358,6 +567,12 @@
         const urlPath = window.location.pathname;
         const promocode = urlPath.split('/promocode/')[1] || 'ZEHN30';
         promocodeText.textContent = promocode;
+        
+        // Update step 4 description with actual promocode
+        const step4Description = document.querySelector('.tutorial-step:nth-child(4) .step-description');
+        if (step4Description) {
+            step4Description.textContent = `${promocode} ni kiriting.`;
+        }
 
         // Cursor animation
         document.addEventListener('mousemove', (e) => {
@@ -419,6 +634,71 @@
         // Allow clicking on promocode to copy
         promocodeText.addEventListener('click', () => {
             copyBtn.click();
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const totalSlides = 6;
+        const carouselContainer = document.getElementById('carouselContainer');
+        const navDots = document.querySelectorAll('.nav-dot');
+
+        function updateCarousel() {
+            const slideWidth = 300; // 280px + 20px gap
+            carouselContainer.scrollTo({
+                left: currentSlide * slideWidth,
+                behavior: 'smooth'
+            });
+            
+            // Update nav dots
+            navDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function slideCarousel(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        // Auto-scroll carousel every 4 seconds
+        setInterval(() => {
+            slideCarousel(1);
+        }, 4000);
+
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let endX = 0;
+
+        carouselContainer.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) {
+                slideCarousel(1); // Swipe left, go to next
+            } else if (endX - startX > 50) {
+                slideCarousel(-1); // Swipe right, go to previous
+            }
+        });
+
+        // Update active dot based on scroll position
+        carouselContainer.addEventListener('scroll', () => {
+            const slideWidth = 300;
+            const newSlide = Math.round(carouselContainer.scrollLeft / slideWidth);
+            if (newSlide !== currentSlide) {
+                currentSlide = newSlide;
+                navDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
         });
     </script>
 </body>
