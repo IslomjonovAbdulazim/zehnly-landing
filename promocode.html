@@ -209,12 +209,15 @@
 
         .carousel-container {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             padding: 20px 0;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            scroll-snap-type: x mandatory;
+            justify-content: center;
+            align-items: center;
         }
 
         .carousel-container::-webkit-scrollbar {
@@ -228,8 +231,17 @@
             gap: 15px;
             flex: 0 0 auto;
             animation: stepAppear 0.8s ease-out;
-            min-width: 280px;
+            min-width: 250px;
             padding: 0 10px;
+            scroll-snap-align: center;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+            transform: scale(0.85);
+        }
+
+        .tutorial-step.center {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .step-description {
@@ -390,10 +402,14 @@
             }
             
             .tutorial-step {
-                min-width: 250px;
+                min-width: 200px;
             }
             
             .tutorial-img {
+                max-width: 180px;
+            }
+            
+            .tutorial-step.center .tutorial-img {
                 max-width: 220px;
             }
             
@@ -440,10 +456,14 @@
             }
             
             .tutorial-step {
-                min-width: 200px;
+                min-width: 160px;
             }
             
             .tutorial-img {
+                max-width: 140px;
+            }
+            
+            .tutorial-step.center .tutorial-img {
                 max-width: 180px;
             }
             
@@ -572,6 +592,9 @@
         if (step4Description) {
             step4Description.textContent = `${promocode} ni kiriting.`;
         }
+        
+        // Initialize first slide as centered
+        updateCarousel();
 
         // Cursor animation
         document.addEventListener('mousemove', (e) => {
@@ -642,7 +665,7 @@
         const navDots = document.querySelectorAll('.nav-dot');
 
         function updateCarousel() {
-            const slideWidth = 300; // 280px + 20px gap
+            const slideWidth = 265; // 250px + 15px gap
             carouselContainer.scrollTo({
                 left: currentSlide * slideWidth,
                 behavior: 'smooth'
@@ -651,6 +674,12 @@
             // Update nav dots
             navDots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
+            });
+            
+            // Update center class for visual effect
+            const steps = document.querySelectorAll('.tutorial-step');
+            steps.forEach((step, index) => {
+                step.classList.toggle('center', index === currentSlide);
             });
         }
 
@@ -687,12 +716,18 @@
 
         // Update active dot based on scroll position
         carouselContainer.addEventListener('scroll', () => {
-            const slideWidth = 300;
+            const slideWidth = 265;
             const newSlide = Math.round(carouselContainer.scrollLeft / slideWidth);
             if (newSlide !== currentSlide) {
                 currentSlide = newSlide;
                 navDots.forEach((dot, index) => {
                     dot.classList.toggle('active', index === currentSlide);
+                });
+                
+                // Update center class for visual effect
+                const steps = document.querySelectorAll('.tutorial-step');
+                steps.forEach((step, index) => {
+                    step.classList.toggle('center', index === currentSlide);
                 });
             }
         });
